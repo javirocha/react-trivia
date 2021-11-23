@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 
-const MAX_QUESTIONS = 3
+const MAX_QUESTIONS = 10
 const API_URL = `https://opentdb.com/api.php?amount=${MAX_QUESTIONS}&encode=url3986`
 
 const useHttp = () => {
