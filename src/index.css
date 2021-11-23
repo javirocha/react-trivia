@@ -1,13 +1,214 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+:root {
+  --bg-dark: #20082c;
+  --foreground: #f1f1f1;
+  --primary: #722797;
+  --highlight: #9f42ce;
+  --gold: #ffe44d;
+  --info: #225f8d;
+  --accent: #8d2257;
+  --success: #248b24;
+  --error: #8b2424;
+  --button-background: #281234;
+  --button-accent: #3b1a4d;
+  --button-gradient: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 51%);
+}
+::placeholder {
+  color: var(--foreground);
+  opacity: .3;
+}
+html, body {
+  min-height: 100%;
+  height: 100%;
+}
+ul {
+  list-style: none;
+}
+body {
+  font: 1.4rem/1.6rem 'Open Sans', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--foreground);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+h1 {
+  text-indent: -9999em;
+  background: url('images/trivia-logo.png') 0 0 no-repeat;
+  background-size: contain;
+  width: 300px;
+  height: 165px;
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
+  transition: all .3s ease-in-out;
+}
+h1.game-on {
+  width: 150px;
+  height: 82px;
+}
+button {
+  font-family: 'Open Sans', sans-serif;
+  border: 0;
+  border-radius: .3rem;
+  font-weight: 200;
+  font-size: 1rem;
+  color: var(--foreground);
+  background-color: var(--button-background);
+  display: block;
+  padding: .7rem 1rem;
+  margin: 1rem auto;
+  background-image: var(--button-gradient);
+  cursor: pointer;
+}
+.btn-info{
+  background-color: var(--info);
+}
+.btn-accent{
+  background-color: var(--accent);
+}
+.btn-info, .btn-accent {
+  padding: .6rem 2.5rem;
+  font-size: 1.2rem;
+}
+.btn-info:disabled, .btn-accent:disabled {
+  filter: saturate(30%);
+}
+button:hover{
+  filter: brightness(120%);
+}
+@media (hover: none) {
+  button:hover { filter: none; }
+}
+button:active {
+  filter: brightness(80%);
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: .8;
+}
+#loading-spinner {
+  width: 4rem;
+  height: 4rem;
+  border: .5rem solid transparent;
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s ease-in-out infinite;
+  margin: 1rem auto;
+}
+#trivia {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+.card {
+  min-width: 300px;
+  width: 90%;
+  margin: auto;
+  min-height: 35vh;
+  border: .1rem solid var(--primary);
+  background-color: var(--button-background);
+  border-radius: .5rem;
+  padding: 3rem 1rem 1rem;
+  margin-top: -2.2rem;
+  text-align: center;
+}
+h2 {
+  font-weight: 200;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+h3 {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+#answers button {
+  width: 100%;
+  box-shadow: 0 0 .2rem rgba(0, 0, 0, .5);
+}
+.correct {
+  background-color: var(--success);
+}
+.incorrect {
+  background-color: var(--error);
+}
+
+#hud {
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: .9rem;
+  justify-content: space-between;
+}
+
+ul.scores {
+  margin: 1rem auto;
+  width: 80%;
+  border: .1rem solid var(--primary);
+  border-radius: .3rem;
+}
+ul.scores li {
+  display: flex;
+  padding: .6rem;
+  justify-content: space-between;
+  background-color: var(--button-background);
+  font-size: 1rem;
+}
+ul.scores li:nth-child(even) {
+  background-color: var(--button-accent);
+}
+ul.scores li:first-child {
+  border-radius: .3rem .3rem 0 0;
+}
+ul.scores li:last-child {
+  border-radius: 0 0 .3rem .3rem;
+}
+ul.scores li:only-child {
+  border-radius: .3rem;
+}
+
+form {
+  margin-top: 1rem;
+}
+input {
+  width: 100%;
+  padding: .6rem;
+  border: 0;
+  border-bottom: .1rem solid var(--primary);
+  outline: none;
+  background-color: transparent;
+  color: var(--foreground);
+  font-size: 1.2rem;
+}
+@media(min-width: 900px) {
+  #trivia {
+    width: 70vw
+  }
+  ul.scores {
+    width: 30%;
+  }
+}
+@media(min-width: 1100px) {
+  #trivia {
+    width: 50vw
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

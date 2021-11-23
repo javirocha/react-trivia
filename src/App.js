@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector } from 'react-redux'
+import { Routes, Route } from 'react-router-dom'
+import Game from './components/Game'
+import Scores from './components/Scores'
 
 function App() {
+  const gameStarted = useSelector(state => state.game.isGameOn)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1 className={ gameStarted ? 'game-on' : '' }>React Trivia</h1>
+      <Routes>
+        <Route index element={ <Game /> } />
+        <Route path="scores" element={ <Scores /> } />
+      </Routes>
+    </>
   );
 }
 
