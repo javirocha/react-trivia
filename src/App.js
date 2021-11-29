@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Game from './components/Game'
 import Scores from './components/Scores'
 
@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/*" element={ <Game /> } />
         <Route path="scores" element={ <Scores /> } />
+        <Route path="*" element={ <Navigate to="/" /> } />
       </Routes>
     </BrowserRouter>
   );
